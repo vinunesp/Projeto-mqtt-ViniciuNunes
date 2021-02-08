@@ -26,7 +26,7 @@ Serial.begin(9600); //Inicia o monitor serial
     //Inicia o controlador Ethernet e solicita um IP para o servidor de DHCP
     Ethernet.begin(mac);
 
-    mqttClient.setServer("54.174.235.157",1883);
+    mqttClient.setServer("54.161.191.80",1883);
 
     //Inicia o monitor Serial
     Serial.begin(9600);
@@ -54,16 +54,23 @@ void loop() {
 
 if  (estado_sensor==1){
 Serial.println ("O sensor esta aberto!!");
+Serial.println(estado_sensor);
+mensagem = mqttClient.publish("0vinunesp","aberto");}
 
-}if (estado_sensor==0){
+if (estado_sensor==0){
 Serial.println ("O sensor esta fechado!!");
-}
+Serial.println(estado_sensor);
+mensagem = mqttClient.publish("0vinunesp","fechado");}
+ 
+ 
+mqttClient.connect("vinunesp");
 
-  mqttClient.connect("vinunesp");
-  
-  mensagem = mqttClient.publish("0vinunesp","funcionou");
-  Serial.println(mensagem);
+
+ 
+  //Serial.println(" o sensor esta fechado");
+  //mensagem = mqttClient.publish("0vinunesp","fechado");
+  //Serial.println(mensagem);
   
   mqttClient.loop();
-  delay(500);
+
 }
