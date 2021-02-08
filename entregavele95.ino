@@ -61,7 +61,7 @@ Serial.println ("O sensor esta fechado!!");
 
   mqttClient.connect("vinunesp");
   
-  mensagem = mqttClient.publish("lucasjorge-t","funcionou");
+  mensagem = mqttClient.publish("0vinunesp","funcionou");
   Serial.println(mensagem);
   
   mqttClient.loop();
